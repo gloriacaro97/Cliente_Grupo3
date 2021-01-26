@@ -16,11 +16,12 @@ class Spotify{
 
 // Clase Canción
 class Cancion{
-    constructor(titulo,artista,disco,año){
+    constructor(titulo,artista,disco,año,genero){
         this.titulo = titulo;
         this.artista = artista;
         this.disco = disco;
         this.año = año;
+        this.genero = genero;
     }
 }
 
