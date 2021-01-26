@@ -7,30 +7,271 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Plantilla básica para Bootstrap">
   <meta name="author" content="Parzibyte">
-  <title>Plantilla inicial para Boostrap</title>
+  <title>Inicia Sesión</title>
 
   <!-- Cargar el CSS de Boostrap-->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!-- Cargar estilos propios -->
   <link href="plantillaBase_Bootstrap4.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 
-  <header></header>
+  <header>
+    <!-- NAVEGADOR --------------------------------------------------------------------------------------------------------------->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="img/Spotify_Logo_RGB_White.png" alt="logotipoSpotify">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="mostrarFormCrearPlaylist()">Playlist</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="mostrarFormSuscripcion()">Suscripciones</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="mostrarFormInicioSesion()">Inicia Sesión</a>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- NAVEGADOR --------------------------------------------------------------------------------------------------------------->
 
 
   <main role="main" class="container">
 
-    
+    <!-- CONTENIDO HOME --------------------------------------------------------------------------------------------------------------->
+    <div class="row mt-5" name="home">
+      <div class="col-md-6 offset-md-3">
+        <h1>Hey, bienvenido a spotify</h1>
+      </div>
+    </div>
 
+    <!-- FORMULARIO INICIO SESIÓN --------------------------------------------------------------------------------------------------------------->
+    <div class="row mt-5">
+      <div class="col-md-6 offset-md-3">
+        <form name="formInicioSesión">
+          <h5>Inicia Sesión</h5>
+          <div class="form-group row mt-5">
+            <label class="col-4 col-form-label" for="usuario">Correo electrónico</label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-at"></i>
+                  </div>
+                </div>
+                <input id="usuario" name="email" placeholder="Correo electrónico" type="text" class="form-control"
+                  required="required">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="password" class="col-4 col-form-label">Contraseña</label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                </div>
+                <input id="password" name="password" placeholder="Contraseña" type="text" required="required"
+                  class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-4 col-8">
+              <button name="submit" type="submit" class="btn btn-success">Acceder</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- FORMULARIO INICIO SESIÓN --------------------------------------------------------------------------------------------------------------->
+
+    <!-- FORMULARIO SUSCRIPCIÓN --------------------------------------------------------------------------------------------------------------->
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form name="formSuscripcion">
+          <h5>Rellena el Formulario de Suscripción</h5>
+          <div class="form-group row mt-5">
+            <label for="nombre" class="col-4 col-form-label">Nombre</label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-user"></i>
+                  </div>
+                </div>
+                <input id="nombre" name="nombre" placeholder="Introduce tu nombre" type="text" required="required"
+                  class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-4 col-form-label">Correo electrónico</label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-at"></i>
+                  </div>
+                </div>
+                <input id="email" name="email" placeholder="Correo electrónico" type="text" required="required"
+                  class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="password" class="col-4 col-form-label">Contraseña</label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                </div>
+                <input id="password" name="password" placeholder="Contraseña" type="text" class="form-control"
+                  required="required">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="password2" class="col-4 col-form-label">Confirma tu contraseña</label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-lock"></i>
+                  </div>
+                </div>
+                <input id="password2" name="password2" placeholder="Confirma tu contraseña" type="text"
+                  class="form-control" required="required">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-4"></div>
+            <div class="col-8">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input name="checkboxPremium" id="checkboxPremium_0" type="checkbox" class="custom-control-input"
+                  value="premium" aria-describedby="checkboxPremiumHelpBlock" required="required">
+                <label for="checkboxPremium_0" class="custom-control-label">Premium</label>
+              </div>
+              <span id="checkboxPremiumHelpBlock" class="form-text text-muted">Selecciona Premium para disfrutar esta
+                suscripción</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-4 col-8">
+              <button name="submit" type="submit" class="btn btn-success">Suscribirse</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- FORMULARIO SUSCRIPCIÓN --------------------------------------------------------------------------------------------------------------->
+
+    <!-- FORMULARIO CREAR PLAYLIST --------------------------------------------------------------------------------------------------------------->
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form name="formCrearPlaylist">
+          <h5>Crea tus Playlist</h5>
+          <div class="form-group row mt-5">
+            <label for="nombrePlayList" class="col-4 col-form-label">Nombre</label>
+            <div class="col-8">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-music"></i>
+                  </div>
+                </div>
+                <input id="nombrePlayList" name="nombrePlayList" placeholder="Introduce el nombre de tu Playlist"
+                  type="text" required="required" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4">Género</label>
+            <div class="col-8">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input name="radioGenero" id="radioGenero_0" type="radio" class="custom-control-input" value="rock"
+                  aria-describedby="radioGeneroHelpBlock" required="required">
+                <label for="radioGenero_0" class="custom-control-label">Rock</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input name="radioGenero" id="radioGenero_1" type="radio" class="custom-control-input" value="pop"
+                  aria-describedby="radioGeneroHelpBlock" required="required">
+                <label for="radioGenero_1" class="custom-control-label">Pop</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input name="radioGenero" id="radioGenero_2" type="radio" class="custom-control-input" value="flamenco"
+                  aria-describedby="radioGeneroHelpBlock" required="required">
+                <label for="radioGenero_2" class="custom-control-label">Flamenco</label>
+              </div>
+              <span id="radioGeneroHelpBlock" class="form-text text-muted">Filtra tus canciones por género</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label" for="comboCanciones">Canciones</label>
+            <div class="col-8">
+              <select id="comboCanciones" name="comboCanciones" class="custom-select"
+                aria-describedby="comboCancionesHelpBlock" required="required" multiple="multiple">
+                <option value="cancion1">cancion 1</option>
+                <option value="cancion2">cancion2</option>
+                <option value="cancion3">cancion3</option>
+              </select>
+              <span id="comboCancionesHelpBlock" class="form-text text-muted">Selecciona las canciones para tu
+                Playlist</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-4 col-8">
+              <button name="submit" type="submit" class="btn btn-success">Crear Playlist</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </main>
 
+
+  <!---------------------------------------------------------------------------------------------------->
+  <!-- SCRIPTS ----------------------------------------------------------------------------------------->
+  <!---------------------------------------------------------------------------------------------------->
+  <script type="text/javascript" src="objetos.js"></script>
+  <script type="text/javascript" src="codigo.js"></script>
+
+
+
+
   <!-- Cargar jQuery y librerías JS necesarias. Si solo quieres el diseño, no las cargues -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
 </body>
 
