@@ -15,6 +15,7 @@
 
   <!-- Cargar estilos propios -->
   <link href="plantillaBase_Bootstrap4.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -57,11 +58,14 @@
   <main role="main" class="container">
 
     <!-- CONTENIDO HOME --------------------------------------------------------------------------------------------------------------->
-    <div class="row mt-5" name="home">
-      <div class="col-md-6 offset-md-3">
-        <h1>Hey, bienvenido a spotify</h1>
-      </div>
-    </div>
+    <!-- <div class="row">
+        <div class="col-lg-12">
+          <img class="img-fluid" src="img/home2.png" />
+        </div>
+      </div> -->
+
+
+    <!-- CONTENIDO HOME --------------------------------------------------------------------------------------------------------------->
 
     <!-- FORMULARIO INICIO SESIÓN --------------------------------------------------------------------------------------------------------------->
     <div class="row mt-5">
@@ -172,7 +176,7 @@
             <div class="col-8">
               <div class="custom-control custom-checkbox custom-control-inline">
                 <input name="checkboxPremium" id="checkboxPremium_0" type="checkbox" class="custom-control-input"
-                  value="premium" aria-describedby="checkboxPremiumHelpBlock" required="required">
+                  value="premium" aria-describedby="checkboxPremiumHelpBlock">
                 <label for="checkboxPremium_0" class="custom-control-label">Premium</label>
               </div>
               <span id="checkboxPremiumHelpBlock" class="form-text text-muted">Selecciona Premium para disfrutar esta
@@ -182,6 +186,7 @@
           <div class="form-group row">
             <div class="offset-4 col-8">
               <button name="submit" type="submit" class="btn btn-success">Suscribirse</button>
+              <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
         </form>
@@ -212,19 +217,19 @@
             <label class="col-4">Género</label>
             <div class="col-8">
               <div class="custom-control custom-radio custom-control-inline">
-                <input name="radioGenero" id="radioGenero_0" type="radio" class="custom-control-input" value="rock"
+                <input name="radioGenero" id="radioRock" type="radio" class="custom-control-input" value="rock"
                   aria-describedby="radioGeneroHelpBlock" required="required">
-                <label for="radioGenero_0" class="custom-control-label">Rock</label>
+                <label for="radioRock" class="custom-control-label">Rock</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
-                <input name="radioGenero" id="radioGenero_1" type="radio" class="custom-control-input" value="pop"
+                <input name="radioGenero" id="radioPop" type="radio" class="custom-control-input" value="pop"
                   aria-describedby="radioGeneroHelpBlock" required="required">
-                <label for="radioGenero_1" class="custom-control-label">Pop</label>
+                <label for="radioPop" class="custom-control-label">Pop</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
-                <input name="radioGenero" id="radioGenero_2" type="radio" class="custom-control-input" value="flamenco"
+                <input name="radioGenero" id="radioFlamenco" type="radio" class="custom-control-input" value="flamenco"
                   aria-describedby="radioGeneroHelpBlock" required="required">
-                <label for="radioGenero_2" class="custom-control-label">Flamenco</label>
+                <label for="radioFlamenco" class="custom-control-label">Flamenco</label>
               </div>
               <span id="radioGeneroHelpBlock" class="form-text text-muted">Filtra tus canciones por género</span>
             </div>
@@ -234,7 +239,7 @@
             <div class="col-8">
               <select id="comboCanciones" name="comboCanciones" class="custom-select"
                 aria-describedby="comboCancionesHelpBlock" required="required" multiple="multiple">
-                <option value="cancion1">cancion 1</option>
+                <option value="cancion1">cancion1</option>
                 <option value="cancion2">cancion2</option>
                 <option value="cancion3">cancion3</option>
               </select>
@@ -244,12 +249,68 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="submit" class="btn btn-success">Crear Playlist</button>
+              <button name="submit" type="submit" class="btn btn-success">Crear</button>
+              <button name="submit" type="button" class="btn btn-success" onclick="mostrarFormModPlaylist()">Modificar</button>
+              <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
         </form>
       </div>
     </div>
+    <!-- FORMULARIO CREAR PLAYLIST --------------------------------------------------------------------------------------------------------------->
+
+    <!-- FORMULARIO MODIFICAR PLAYLIST --------------------------------------------------------------------------------------------------------------->
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form name="formModPlaylist">
+          <h5>Modifica tus Playlist</h5>
+          <div class="form-group row mt-5">
+        <label for="selectPlaylist" class="col-4 col-form-label">Playlist</label> 
+        <div class="col-8">
+          <select id="selectPlaylist" name="selectPlaylist" class="custom-select" aria-describedby="selectPlaylistHelpBlock" required="required">
+            <option value="playlist1">Playlist1</option>
+            <option value="playlist2">Playlist2</option>
+          </select> 
+          <span id="selectPlaylistHelpBlock" class="form-text text-muted">Selecciona la Playlist para modificar sus canciones</span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4">Género</label> 
+        <div class="col-8">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input name="radioGeneroMod" id="radioRockMod" type="radio" aria-describedby="radioGeneroModHelpBlock" required="required" class="custom-control-input" value="rock"> 
+            <label for="radioRockMod" class="custom-control-label">Rock</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input name="radioGeneroMod" id="radioPopMod" type="radio" aria-describedby="radioGeneroModHelpBlock" required="required" class="custom-control-input" value="pop"> 
+            <label for="radioPopMod" class="custom-control-label">Pop</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input name="radioGeneroMod" id="radioFlamencoMod" type="radio" aria-describedby="radioGeneroModHelpBlock" required="required" class="custom-control-input" value="flamenco"> 
+            <label for="radioFlamencoMod" class="custom-control-label">Flamenco</label>
+          </div> 
+          <span id="radioGeneroModHelpBlock" class="form-text text-muted">Filtra tus canciones por género</span>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="comboCanciones" class="col-4 col-form-label">Canciones</label> 
+        <div class="col-8">
+          <select multiple="multiple" id="comboCanciones" name="comboCanciones" aria-describedby="comboCancionesHelpBlock" required="required" class="custom-select">
+            <option value="cancion1">cancion1</option>
+            <option value="cancion2">cancion2</option>
+            <option value="cancion3">cancion3</option>
+          </select> 
+          <span id="comboCancionesHelpBlock" class="form-text text-muted">Selecciona las canciones para tu Playlist</span>
+        </div>
+      </div> 
+      <div class="form-group row">
+        <div class="offset-4 col-8">
+          <button name="submit" type="submit" class="btn btn-success">Modificar</button>
+          <button name="submit" type="reset" class="btn btn-danger" onclick="mostrarFormCrearPlaylist()">Cancelar</button>
+        </div>
+      </div>
+    </form>
+    <!-- FORMULARIO MODIFICAR PLAYLIST --------------------------------------------------------------------------------------------------------------->
   </main>
 
 

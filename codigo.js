@@ -13,6 +13,7 @@ function ocultarFormularios() {
     formInicioSesión.style.display = "none";
     formSuscripcion.style.display = "none";
     formCrearPlaylist.style.display = "none";
+    formModPlaylist.style.display = "none";
 }
 
 // Muestra el formulario de Inicio de Sesión -----------------------------------------------------------------------------------------------
@@ -31,4 +32,10 @@ function mostrarFormSuscripcion() {
 function mostrarFormCrearPlaylist() {
     ocultarFormularios();
     formCrearPlaylist.style.display = "block";
+}
+
+// Muestra el formulario de Modificar Playlist -----------------------------------------------------------------------------------------------
+function mostrarFormModPlaylist() {
+    ocultarFormularios();
+    formModPlaylist.style.display = "block";
 }
