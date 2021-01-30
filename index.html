@@ -38,13 +38,13 @@
               <a class="nav-link" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="mostrarFormCrearPlaylist()">Playlist</a>
+              <a class="nav-link" href="#" id="playlist">Playlist</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="mostrarFormSuscripcion()">Suscripciones</a>
+              <a class="nav-link" href="#" id="suscripciones">Suscripciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="mostrarFormInicioSesion()">Inicia Sesión</a>
+              <a class="nav-link" href="#" id="inicioSesion">Inicia Sesión</a>
 
             </li>
           </ul>
@@ -102,7 +102,7 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="submit" class="btn btn-success">Acceder</button>
+              <button name="submit" type="button" class="btn btn-success">Acceder</button>
             </div>
           </div>
         </form>
@@ -185,7 +185,7 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="submit" class="btn btn-success">Suscribirse</button>
+              <button name="submit" type="button" class="btn btn-success" id="btnSuscripcion">Suscribirse</button>
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
@@ -254,9 +254,8 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="submit" class="btn btn-success">Crear</button>
-              <button name="submit" type="button" class="btn btn-success"
-                onclick="mostrarFormModPlaylist()">Modificar</button>
+              <button name="submit" type="button" class="btn btn-success">Crear</button>
+              <button name="submit" type="button" class="btn btn-success" id="mostrarModPlaylist">Modificar</button>
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
@@ -324,9 +323,8 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="submit" class="btn btn-success">Modificar</button>
-              <button name="submit" type="reset" class="btn btn-danger"
-                onclick="mostrarFormCrearPlaylist()">Cancelar</button>
+              <button name="submit" type="button" class="btn btn-success">Modificar</button>
+              <button name="submit" type="reset" class="btn btn-danger" id="cancelarModPlaylist">Cancelar</button>
             </div>
           </div>
         </form>

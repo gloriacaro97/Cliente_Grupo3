@@ -8,7 +8,21 @@ class Spotify{
     }
 
     // MÉTODOS
+    añadirSuscripcion(oCliente){
+        let oClienteExistente = null;
 
+        oClienteExistente = _buscarCliente(oCliente.correo);
+        console.log(oCliente.correo);
+        console.log(oClienteExistente);
+        //Si el cliente no existe lo inserto
+        if(oClienteExistente == null){
+            this.clientes.push(oCliente);
+            return true;
+        }else{
+            //El email existe
+            return false;
+        }
+    }
 
 
 
@@ -37,19 +51,18 @@ class Playlist{
 
 // Clase Cliente
 class Cliente{
-    constructor(nombre,correo,contraseña,fechaNac,listaPlaylists){
+    constructor(nombre,correo,contraseña,listaPlaylists){
         this.nombre = nombre;
         this.correo = correo;
         this.constraseña = contraseña;
-        this.fechaNac = fechaNac;
         this.listaPlaylists = listaPlaylists;
     }
 }
 
-// Clase Subscripcion
-class Subscripcion extends Cliente{
-    constructor(nombre,correo,contraseña,fechaNac,listaPlaylists,premium){
-        super(nombre,correo,contraseña,fechaNac,listaPlaylists);
+// Clase Suscripcion
+class Suscripcion extends Cliente{
+    constructor(nombre,correo,contraseña,listaPlaylists,premium){
+        super(nombre,correo,contraseña,listaPlaylists);
         this.premium = premium;
     }
 }
