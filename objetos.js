@@ -12,8 +12,6 @@ class Spotify{
         let oClienteExistente = null;
 
         oClienteExistente = _buscarCliente(oCliente.correo);
-        console.log(oCliente.correo);
-        console.log(oClienteExistente);
         //Si el cliente no existe lo inserto
         if(oClienteExistente == null){
             this.clientes.push(oCliente);
@@ -24,6 +22,26 @@ class Spotify{
         }
     }
 
+    añadirPlaylist(oCliente,oPlaylist){
+        let oClientePremium = null;
+        oClientePremium = _buscarPremium(oCliente.correo);
+        // Si es premium, se añade la playlist
+        if(oClientePremium != null){
+            oClientePremium.listaPlaylists.push(oPlaylist);
+            return true;
+        }else if(oCliente.listaPlaylists.length == 3){ // Si no es premium, se comprueba el número de pleylists que ha creado
+            // Tiene el máximo número de playlists permitidas
+            return false;
+        } else{
+            oCliente.listaPlaylists.push(oPlaylist);
+            return true;
+        }
+    }
+
+    filtrarCanciones(generoBuscado){
+        let cancionesGenero = _buscarCanciones(generoBuscado);
+        return cancionesGenero;
+    }
 
 
 }

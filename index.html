@@ -218,7 +218,7 @@
             <div class="col-8">
               <div class="custom-control custom-radio custom-control-inline">
                 <input name="radioGenero" id="radioTodos" type="radio" class="custom-control-input" value="todos"
-                  aria-describedby="radioGeneroHelpBlock" required="required">
+                  aria-describedby="radioGeneroHelpBlock" required="required" checked>
                 <label for="radioTodos" class="custom-control-label">Todos</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
@@ -240,22 +240,22 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-4 col-form-label" for="comboCanciones">Canciones</label>
+            <label class="col-4 col-form-label" for="comboCrearCanciones">Canciones</label>
             <div class="col-8">
-              <select id="comboCanciones" name="comboCanciones" class="custom-select"
-                aria-describedby="comboCancionesHelpBlock" required="required" multiple="multiple">
+              <select id="comboCrearCanciones" name="comboCrearCanciones" class="custom-select"
+                aria-describedby="comboCrearCancionesHelpBlock" required="required" multiple="multiple">
                 <option value="cancion1">cancion1</option>
                 <option value="cancion2">cancion2</option>
                 <option value="cancion3">cancion3</option>
               </select>
-              <span id="comboCancionesHelpBlock" class="form-text text-muted">Selecciona las canciones para tu
+              <span id="comboCrearCancionesHelpBlock" class="form-text text-muted">Selecciona las canciones para tu
                 Playlist</span>
             </div>
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="button" class="btn btn-success">Crear</button>
-              <button name="submit" type="button" class="btn btn-success" id="mostrarModPlaylist">Modificar</button>
+              <button name="submit" type="button" class="btn btn-success" id="btnCrearPlaylist">Crear</button>
+              <button name="submit" type="button" class="btn btn-success" id="btnMostrarModPlaylist">Modificar</button>
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
@@ -286,7 +286,7 @@
             <div class="col-8">
               <div class="custom-control custom-radio custom-control-inline">
                 <input name="radioGeneroMod" id="radioTodosMod" type="radio" aria-describedby="radioGeneroModHelpBlock"
-                  required="required" class="custom-control-input" value="todos">
+                  required="required" class="custom-control-input" value="todos" checked>
                 <label for="radioTodosMod" class="custom-control-label">Todos</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
@@ -323,8 +323,8 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="button" class="btn btn-success">Modificar</button>
-              <button name="submit" type="reset" class="btn btn-danger" id="cancelarModPlaylist">Cancelar</button>
+              <button name="submit" type="button" class="btn btn-success" id="btnModificarPlaylist">Modificar</button>
+              <button name="submit" type="reset" class="btn btn-danger" id="btnCancelarModPlaylist">Cancelar</button>
             </div>
           </div>
         </form>
