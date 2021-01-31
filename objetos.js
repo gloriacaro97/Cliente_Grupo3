@@ -29,8 +29,8 @@ class Spotify{
         if(oClientePremium != null){
             oClientePremium.listaPlaylists.push(oPlaylist);
             return true;
-        }else if(oCliente.listaPlaylists.length == 3){ // Si no es premium, se comprueba el número de pleylists que ha creado
-            // Tiene el máximo número de playlists permitidas
+        }else if(oCliente.listaPlaylists.length == 3){ // Si no es premium, se comprueba el número de playlists que ha creado
+            // Tiene el máximo número de playlists permitidas, no se añade la playlist
             return false;
         } else{
             oCliente.listaPlaylists.push(oPlaylist);

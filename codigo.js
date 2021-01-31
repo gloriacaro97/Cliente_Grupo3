@@ -17,6 +17,8 @@ document.getElementById("radioTodos").addEventListener("click",opcionesTodas);
 document.getElementById("radioRock").addEventListener("click",opcionesRock);
 document.getElementById("radioPop").addEventListener("click",opcionesPop);
 document.getElementById("radioFlamenco").addEventListener("click",opcionesFlamenco);
+document.getElementById("btnAñadirCancion").addEventListener("click",añadirCanciones);
+document.getElementById("btnEliminarCancion").addEventListener("click",eliminarCanciones);
 document.getElementById("btnCrearPlaylist").addEventListener("click",añadirPlaylist);
 document.getElementById("btnMostrarModPlaylist").addEventListener("click",mostrarFormModPlaylist);
 
@@ -25,6 +27,8 @@ document.getElementById("radioTodosMod").addEventListener("click",opcionesTodasM
 document.getElementById("radioRockMod").addEventListener("click",opcionesRockMod);
 document.getElementById("radioPopMod").addEventListener("click",opcionesPopMod);
 document.getElementById("radioFlamencoMod").addEventListener("click",opcionesFlamencoMod);
+document.getElementById("btnAñadirCancionMod").addEventListener("click",añadirCancionesMod);
+document.getElementById("btnEliminarCancionMod").addEventListener("click",eliminarCancionesMod);
 document.getElementById("btnModificarPlaylist").addEventListener("click",modificarPlaylist);
 document.getElementById("btnCancelarModPlaylist").addEventListener("click",mostrarFormCrearPlaylist);
 
@@ -164,6 +168,43 @@ function opcionesFlamenco(){
     }
 }
 
+// Añadir canciones a la playlist
+function añadirCanciones(){
+    var listaCanciones = document.getElementById("comboCrearCanciones");
+    var playlist = document.getElementById("comboCrearPlaylist");
+    var valoresListaCanciones = listaCanciones.options;
+    var valoresPlaylist = playlist.options;
+
+    for(var i = 0; i < valoresListaCanciones.length; i++){
+        var noPasar = false;
+        if(valoresListaCanciones[i].selected){
+            for(var j = 0; j < valoresPlaylist.length; j++){
+                if(valoresListaCanciones[i].value == valoresPlaylist[j].value){
+                    noPasar = true;
+                }
+            }
+            if(!noPasar){
+                var opcion = document.createElement("option");
+                opcion.text = valoresListaCanciones[i].text;
+                opcion.value = valoresListaCanciones[i].value;
+                valoresPlaylist.add(opcion);
+            }
+        }
+    }
+}
+
+// Eliminar canciones de la playlist
+function eliminarCanciones(){
+    var playlist = document.getElementById("comboCrearPlaylist");
+    var valoresPlaylist = playlist.options;
+
+    for(var i = (valoresPlaylist.length-1); i >= 0; i--){
+        if(valoresPlaylist[i].selected){
+            playlist.remove(i);
+        }
+    }
+}
+
 // Añadir playlist
 function añadirPlaylist(){
 
@@ -245,6 +286,43 @@ function opcionesFlamencoMod(){
         opcion.text = cancionesFlamenco[i].titulo;
         opcion.value = cancionesFlamenco[i].titulo;
         listaCanciones.add(opcion);
+    }
+}
+
+// Añadir canciones a la playlist
+function añadirCancionesMod(){
+    var listaCanciones = document.getElementById("comboCanciones");
+    var playlist = document.getElementById("comboPlaylist");
+    var valoresListaCanciones = listaCanciones.options;
+    var valoresPlaylist = playlist.options;
+
+    for(var i = 0; i < valoresListaCanciones.length; i++){
+        var noPasar = false;
+        if(valoresListaCanciones[i].selected){
+            for(var j = 0; j < valoresPlaylist.length; j++){
+                if(valoresListaCanciones[i].value == valoresPlaylist[j].value){
+                    noPasar = true;
+                }
+            }
+            if(!noPasar){
+                var opcion = document.createElement("option");
+                opcion.text = valoresListaCanciones[i].text;
+                opcion.value = valoresListaCanciones[i].value;
+                valoresPlaylist.add(opcion);
+            }
+        }
+    }
+}
+
+// Eliminar canciones de la playlist
+function eliminarCancionesMod(){
+    var playlist = document.getElementById("comboPlaylist");
+    var valoresPlaylist = playlist.options;
+
+    for(var i = (valoresPlaylist.length-1); i >= 0; i--){
+        if(valoresPlaylist[i].selected){
+            playlist.remove(i);
+        }
     }
 }
 
