@@ -76,9 +76,9 @@ function añadirSuscripcion(){
     let contraseña = formSuscripcion.password.value;
     let suscripcion = formSuscripcion.checkboxPremium_0.checked;
     if(suscripcion){
-        oCliente = new Suscripcion(nombre,email,contraseña,[],suscripcion);
+        oCliente = new Suscripcion(nombre,email,contraseña,suscripcion);
     }else{
-        oCliente = new Cliente(nombre,email,contraseña,[]);
+        oCliente = new Cliente(nombre,email,contraseña);
     }
 
     if(oSpotify.añadirSuscripcion(oCliente)){
@@ -206,10 +206,19 @@ function eliminarCanciones(){
 }
 
 // Añadir playlist
-function añadirPlaylist(){
+/*function añadirPlaylist(){
+    var comboPlaylist = document.getElementById("comboCrearPlaylist");
+    var valoresPlaylist = comboPlaylist.options;
+    var cancionesPlaylist = [];
 
+    for(var i = 0; i > valoresPlaylist.length; i++){
+        cancion = _buscarCancion(valoresPlaylist[i].value);
+        
+    }
+
+    
     limpiarCamposCrearPlaylist();
-}
+}*/
 
 // FORMULARIO DE MODIFICAR PLAYLIST ----------------------------------------------------------------------------------------------------------
 // Muestra el formulario de Modificar Playlist 

@@ -5,6 +5,7 @@ class Spotify{
     constructor(){
         this.canciones = [];
         this.clientes = [];
+        this.sesionIniciada = null;
     }
 
     // MÉTODOS
@@ -69,18 +70,18 @@ class Playlist{
 
 // Clase Cliente
 class Cliente{
-    constructor(nombre,correo,contraseña,listaPlaylists){
+    constructor(nombre,correo,contraseña){
         this.nombre = nombre;
         this.correo = correo;
         this.constraseña = contraseña;
-        this.listaPlaylists = listaPlaylists;
+        this.listaPlaylists = [];
     }
 }
 
 // Clase Suscripcion
 class Suscripcion extends Cliente{
-    constructor(nombre,correo,contraseña,listaPlaylists,premium){
-        super(nombre,correo,contraseña,listaPlaylists);
+    constructor(nombre,correo,contraseña,premium){
+        super(nombre,correo,contraseña);
         this.premium = premium;
     }
 }
