@@ -23,25 +23,34 @@ class Spotify{
         }
     }
 
-    añadirPlaylist(oCliente,oPlaylist){
-        let oClientePremium = null;
-        oClientePremium = _buscarPremium(oCliente.correo);
-        // Si es premium, se añade la playlist
-        if(oClientePremium != null){
-            oClientePremium.listaPlaylists.push(oPlaylist);
-            return true;
-        }else if(oCliente.listaPlaylists.length == 3){ // Si no es premium, se comprueba el número de playlists que ha creado
-            // Tiene el máximo número de playlists permitidas, no se añade la playlist
-            return false;
-        } else{
+    añadirPlaylist(oPlaylist){
+        var oCliente = oPlaylist.creador;
+        if(_buscarPlaylist(oPlaylist)){
+            return false; // Ya existe una playlist con ese nombre
+        }else{
             oCliente.listaPlaylists.push(oPlaylist);
-            return true;
+            return true; // Todo correcto
         }
     }
 
     filtrarCanciones(generoBuscado){
         let cancionesGenero = _buscarCanciones(generoBuscado);
         return cancionesGenero;
+    }
+
+    comprobarNumPlaylists(oCliente){
+        var oClientePremium = null;
+        oClientePremium = _buscarPremium(oCliente.correo);
+
+        if(oClientePremium != null){
+            return false; // El cliente es premium y tiene un número ilimitado de Playlists
+        }else{
+            if(oCliente.listaPlaylists.length() == 3){
+                return true; // El cliente no es premium y tiene el máximo de Playlists permitidas
+            }else{
+                return false;
+            }
+        }
     }
 
 

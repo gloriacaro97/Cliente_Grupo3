@@ -15,7 +15,7 @@ document.getElementById("btnInicioSesion").addEventListener("click", validarForm
 
 // Formulario Suscripcion
 document.getElementById("btnSuscripcion").addEventListener("click", validarFormularioSuscripcion);
-//document.getElementById("btnSuscripcion").addEventListener("click", añadirSuscripcion);
+document.getElementById("btnSuscripcion").addEventListener("click", añadirSuscripcion);
 
 // Formulario Crear Playlist
 document.getElementById("radioTodos").addEventListener("click", opcionesTodas);
@@ -24,20 +24,9 @@ document.getElementById("radioPop").addEventListener("click", opcionesPop);
 document.getElementById("radioFlamenco").addEventListener("click", opcionesFlamenco);
 document.getElementById("btnAñadirCancion").addEventListener("click", añadirCanciones);
 document.getElementById("btnEliminarCancion").addEventListener("click", eliminarCanciones);
-//document.getElementById("btnCrearPlaylist").addEventListener("click", añadirPlaylist);
+document.getElementById("btnCrearPlaylist").addEventListener("click", añadirPlaylist);
 document.getElementById("btnCrearPlaylist").addEventListener("click", validarFormularioCrearPlaylist);
-document.getElementById("btnMostrarModPlaylist").addEventListener("click", mostrarFormModPlaylist);
 
-// Formulario Modificar Playlist
-document.getElementById("radioTodosMod").addEventListener("click", opcionesTodasMod);
-document.getElementById("radioRockMod").addEventListener("click", opcionesRockMod);
-document.getElementById("radioPopMod").addEventListener("click", opcionesPopMod);
-document.getElementById("radioFlamencoMod").addEventListener("click", opcionesFlamencoMod);
-document.getElementById("btnAñadirCancionMod").addEventListener("click", añadirCancionesMod);
-document.getElementById("btnEliminarCancionMod").addEventListener("click", eliminarCancionesMod);
-//document.getElementById("btnModificarPlaylist").addEventListener("click", modificarPlaylist);
-document.getElementById("btnModificarPlaylist").addEventListener("click", validarFormularioModificarPlaylist);
-document.getElementById("btnCancelarModPlaylist").addEventListener("click", mostrarFormCrearPlaylist);
 
 // FORMULARIOS ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -49,7 +38,6 @@ function ocultarFormularios() {
     formInicioSesión.style.display = "none";
     formSuscripcion.style.display = "none";
     formCrearPlaylist.style.display = "none";
-    formModPlaylist.style.display = "none";
 }
 
 // FORMULARIO DE INICIO DE SESION ----------------------------------------------------------------------------------------------------------
@@ -353,19 +341,32 @@ function eliminarCanciones() {
 }
 
 // Añadir playlist
-/*function añadirPlaylist(){
-    var comboPlaylist = document.getElementById("comboCrearPlaylist");
-    var valoresPlaylist = comboPlaylist.options;
-    var cancionesPlaylist = [];
+function añadirPlaylist(){
+    var oCliente = oSpotify.sesionIniciada;
+    if(oSpotify.comprobarNumPlaylists(oCliente)){
+        alert("No puede añadir más Playlists a su cuenta");
+    }else{
+        var nombrePlayList = formCrearPlaylist.nombrePlayList.value;
+        var comboPlaylist = document.getElementById("comboCrearPlaylist");
+        var valoresPlaylist = comboPlaylist.options;
+        var cancionesPlaylist = [];
 
-    for(var i = 0; i > valoresPlaylist.length; i++){
-        cancion = _buscarCancion(valoresPlaylist[i].value);
-        
+        for(var i = 0; i > valoresPlaylist.length; i++){
+            cancion = _buscarCancion(valoresPlaylist[i].value);
+            cancionesPlaylist.push(cancion);
+        }
+
+        let numCanciones = cancionesPlaylist.length();
+        var oPlaylist = new Playlist(nombrePlayList,oCliente,numCanciones,cancionesPlaylist);
+
+        if(oSpotify.añadirPlaylist(oPlaylist)){
+            alert("Playlist añadida correctamente");
+            limpiarCamposCrearPlaylist();
+        }else{
+            alert("Ya existe una playlist con ese nombre");
+        }
     }
-
-    
-    limpiarCamposCrearPlaylist();
-}*/
+}
 
 // VALIDACIÓN FORMULARIO CREAR PLAYLIST *********
 function validarFormularioCrearPlaylist() {
@@ -412,161 +413,6 @@ function validarFormularioCrearPlaylist() {
 }
 // VALIDACIÓN FORMULARIO CREAR PLAYLIST *********
 
-// FORMULARIO DE MODIFICAR PLAYLIST ----------------------------------------------------------------------------------------------------------
-// Muestra el formulario de Modificar Playlist 
-function mostrarFormModPlaylist() {
-    ocultarFormularios();
-    formModPlaylist.style.display = "block";
-}
-
-// Limpia los campos del formulario
-function limpiarCamposModPlaylist() {
-    formModPlaylist.selectPlaylist.selectedIndex = "0";
-    formModPlaylist.radioGeneroMod.value = "todos";
-    opcionesTodasMod();
-}
-
-// Elimina las canciones de la lista
-function limpiarComboModCanciones() {
-    var listaCanciones = document.getElementById("comboCanciones");
-    while (listaCanciones.childElementCount > 0) {
-        listaCanciones.removeChild(listaCanciones.childNodes[0]);
-    }
-}
-
-// Da como opción todas las canciones
-function opcionesTodasMod() {
-    limpiarComboModCanciones();
-    let todasCanciones = oSpotify.canciones;
-    var listaCanciones = document.getElementById("comboCanciones");
-
-    for (var i = 0; i < todasCanciones.length; i++) {
-        var opcion = document.createElement("option");
-        opcion.text = todasCanciones[i].titulo;
-        opcion.value = todasCanciones[i].titulo;
-        listaCanciones.add(opcion);
-    }
-}
-
-// Da como opción las canciones de género ROCK
-function opcionesRockMod() {
-    limpiarComboModCanciones();
-    let cancionesRock = oSpotify.filtrarCanciones("ROCK");
-    var listaCanciones = document.getElementById("comboCanciones");
-
-    for (var i = 0; i < cancionesRock.length; i++) {
-        var opcion = document.createElement("option");
-        opcion.text = cancionesRock[i].titulo;
-        opcion.value = cancionesRock[i].titulo;
-        listaCanciones.add(opcion);
-    }
-}
-
-// Da como opción las canciones de género POP
-function opcionesPopMod() {
-    limpiarComboModCanciones();
-    let cancionesPop = oSpotify.filtrarCanciones("POP");
-    var listaCanciones = document.getElementById("comboCanciones");
-
-    for (var i = 0; i < cancionesPop.length; i++) {
-        var opcion = document.createElement("option");
-        opcion.text = cancionesPop[i].titulo;
-        opcion.value = cancionesPop[i].titulo;
-        listaCanciones.add(opcion);
-    }
-}
-
-// Da como opción las canciones de género FLAMENCO
-function opcionesFlamencoMod() {
-    limpiarComboModCanciones();
-    let cancionesFlamenco = oSpotify.filtrarCanciones("FLAMENCO");
-    var listaCanciones = document.getElementById("comboCanciones");
-
-    for (var i = 0; i < cancionesFlamenco.length; i++) {
-        var opcion = document.createElement("option");
-        opcion.text = cancionesFlamenco[i].titulo;
-        opcion.value = cancionesFlamenco[i].titulo;
-        listaCanciones.add(opcion);
-    }
-}
-
-// Añadir canciones a la playlist
-function añadirCancionesMod() {
-    var listaCanciones = document.getElementById("comboCanciones");
-    var playlist = document.getElementById("comboPlaylistMod");
-    var valoresListaCanciones = listaCanciones.options;
-    var valoresPlaylist = playlist.options;
-
-    for (var i = 0; i < valoresListaCanciones.length; i++) {
-        var noPasar = false;
-        if (valoresListaCanciones[i].selected) {
-            for (var j = 0; j < valoresPlaylist.length; j++) {
-                if (valoresListaCanciones[i].value == valoresPlaylist[j].value) {
-                    noPasar = true;
-                }
-            }
-            if (!noPasar) {
-                var opcion = document.createElement("option");
-                opcion.text = valoresListaCanciones[i].text;
-                opcion.value = valoresListaCanciones[i].value;
-                valoresPlaylist.add(opcion);
-            }
-        }
-    }
-}
-
-// Eliminar canciones de la playlist
-function eliminarCancionesMod() {
-    var playlist = document.getElementById("comboPlaylistMod");
-    var valoresPlaylist = playlist.options;
-
-    for (var i = (valoresPlaylist.length - 1); i >= 0; i--) {
-        if (valoresPlaylist[i].selected) {
-            playlist.remove(i);
-        }
-    }
-}
-
-// Modificar playlist
-function modificarPlaylist() {
-
-    limpiarCamposModPlaylist();
-}
-
-// VALIDACIÓN FORMULARIO MODIFICAR PLAYLIST *********
-function validarFormularioModificarPlaylist() {
-
-    let sErrores = "";
-    let bValido = true; // en principio el formulario es válido
-
-    // Validación Primera Opción No Seleccionada??
-    
-    // Validación Canciones Modificadas
-    let sComboPlaylistMod = document.getElementById('comboCrearPlaylistMod');
-
-    if (sComboPlaylistMod.value == 0 ||
-        sComboPlaylistMod.value == "") {
-        bValido = false;
-        sErrores = "\n- Debe añadir al menos una canción si desea modificar";
-        formCrearPlaylist.comboCrearPlaylistMod.classList.add("errorForm");
-        formCrearPlaylist.comboCrearPlaylistMod.focus();
-    } else {
-        formCrearPlaylist.comboCrearPlaylistMod.classList.remove("errorForm");
-    }
-
-    // --------------------------------------------------------------
-    // COMPROBACIÓN FINAL
-    if (bValido) { // Si todo OK
-        alert("El formulario se ha rellenado correctamente");
-
-    } else {
-        //generamos el alert -------
-        alert(sErrores);
-    }
-
-}
-// VALIDACIÓN FORMULARIO CREAR PLAYLIST *********
-
 // FUNCIONES DE BUSQUEDA ----------------------------------------------------------------------------------------------------------------
 function _buscarCliente(email) {
     let oClienteExistente = null;
@@ -588,4 +434,23 @@ function _buscarCanciones(generoBuscado) {
         }
     }
     return cancionesGenero;
+}
+
+function _buscarCancion(titulo){
+    for (var i = 0; i < oSpotify.canciones.length; i++) {
+        if (oSpotify.canciones[i].titulo == titulo) {
+            return oSpotify.canciones[i];
+        }
+    }
+}
+
+function _buscarPlaylist(oPlaylist){
+    var oCliente = oPlaylist.creador;
+
+    for(var i = 0; i < oCliente.listaPlaylists.length(); i++){
+        if(oCliente.listaPlaylists[i].nombre == oPlaylist.nombre){
+            return true;
+        }
+    }
+    return false;
 }
