@@ -95,14 +95,15 @@
                     <i class="fa fa-lock"></i>
                   </div>
                 </div>
-                <input id="password" name="password" placeholder="Contraseña" type="text" required="required"
+                <input id="password" name="password" placeholder="Contraseña" type="password" required="required"
                   class="form-control">
               </div>
             </div>
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="button" class="btn btn-success">Acceder</button>
+              <!-- <button name="submit" type="button" class="btn btn-success">Acceder</button> -->
+              <input name="submit" class="btn btn-success" value="Acceder" type="button" id="btnInicioSesion" />
             </div>
           </div>
         </form>
@@ -111,6 +112,14 @@
     <!-- FORMULARIO INICIO SESIÓN --------------------------------------------------------------------------------------------------------------->
 
     <!-- FORMULARIO SUSCRIPCIÓN --------------------------------------------------------------------------------------------------------------->
+    <!-- <div class="alert alert-warning alert-dismissible" id="alertFormSuscripcion" role="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <h4 class="alert-heading">Los siguientes errores deben ser solucionados para continuar:</h4>
+      <p id="textoErroresFormSuscripcion"></p> 
+      <hr>
+      <p class="mb-0">Comprueba tus datos e inténtalo de nuevo</p>
+    </div> -->
+
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <form name="formSuscripcion">
@@ -152,7 +161,7 @@
                     <i class="fa fa-lock"></i>
                   </div>
                 </div>
-                <input id="password" name="password" placeholder="Contraseña" type="text" class="form-control"
+                <input id="password" name="password" placeholder="Contraseña" type="password" class="form-control"
                   required="required">
               </div>
             </div>
@@ -166,7 +175,7 @@
                     <i class="fa fa-lock"></i>
                   </div>
                 </div>
-                <input id="password2" name="password2" placeholder="Confirma tu contraseña" type="text"
+                <input id="password2" name="password2" placeholder="Confirma tu contraseña" type="password"
                   class="form-control" required="required">
               </div>
             </div>
@@ -185,7 +194,8 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="button" class="btn btn-success" id="btnSuscripcion">Suscribirse</button>
+              <input name="submit" class="btn btn-success" value="Suscribirse" type="button" id="btnSuscripcion" />
+            <!--  <button name="submit" type="button" class="btn btn-success" id="btnSuscripcion">Suscribirse</button> -->
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
@@ -278,7 +288,8 @@
 
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="button" class="btn btn-success" id="btnCrearPlaylist">Crear</button>
+              <!--<button name="submit" type="button" class="btn btn-success" id="btnCrearPlaylist">Crear</button>-->
+              <input name="submit" class="btn btn-success" value="Crear" type="button" id="btnCrearPlaylist" />
               <button name="submit" type="button" class="btn btn-success" id="btnMostrarModPlaylist">Modificar</button>
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
@@ -353,10 +364,10 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-4 col-form-label" for="comboPlaylist">Tu Playlist</label>
+            <label class="col-4 col-form-label" for="comboPlaylistMod">Tu Playlist</label>
             <div class="col-8">
-              <select id="comboPlaylist" name="comboPlaylist" class="custom-select"
-                aria-describedby="comboPlaylistHelpBlock" required="required" multiple="multiple">
+              <select id="comboPlaylistMod" name="comboPlaylistMod" class="custom-select"
+                aria-describedby="comboPlaylistModHelpBlock" required="required" multiple="multiple">
                 
               </select>
               <span id="comboPlaylistHelpBlock" class="form-text text-muted">Estas son las canciones en tu Playlist</span>
@@ -371,7 +382,8 @@
 
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit" type="button" class="btn btn-success" id="btnModificarPlaylist">Modificar</button>
+              <!-- <button name="submit" type="button" class="btn btn-success" id="btnModificarPlaylist">Modificar</button> -->
+              <input name="submit" class="btn btn-success" value="Modificar" type="button" id="btnModificarPlaylist" />
               <button name="submit" type="reset" class="btn btn-danger" id="btnCancelarModPlaylist">Cancelar</button>
             </div>
           </div>
