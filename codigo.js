@@ -2,6 +2,7 @@
 
 // Principal
 var oSpotify = new Spotify();
+cargarDatos();
 
 // EVENTOS A BOTONES ----------------------------------------------------------------------------------------------------------------------------------
 // NavBar
@@ -23,7 +24,6 @@ document.getElementById("radioPop").addEventListener("click", opcionesPop);
 document.getElementById("radioFlamenco").addEventListener("click", opcionesFlamenco);
 document.getElementById("btnAñadirCancion").addEventListener("click", añadirCanciones);
 document.getElementById("btnEliminarCancion").addEventListener("click", eliminarCanciones);
-document.getElementById("btnCrearPlaylist").addEventListener("click", añadirPlaylist);
 document.getElementById("btnCrearPlaylist").addEventListener("click", validarFormularioCrearPlaylist);
 
 
@@ -44,6 +44,7 @@ function cerrarSesion(){
     if(oSpotify.sesionIniciada != null){
         oSpotify.cerrarSesion();
         ocultarFormularios();
+        alert("Ha cerrado la sesión");
     }else{
         alert("No hay ninguna sesión iniciada");
         mostrarFormInicioSesion();
@@ -64,7 +65,7 @@ function mostrarFormInicioSesion() {
 // Limpia los campos del formulario
 function limpiarCamposInicioSesion() {
     formInicioSesión.email.value = "";
-    formInicioSesión.password.value = "";
+    formInicioSesión.passwordIni.value = "";
 }
 
 // VALIDACIÓN FORMULARIO INICIO DE SESIÓN *********
@@ -89,19 +90,19 @@ function validarFormularioIniSesion() {
 
 
     // Validación contraseña 
-    let sPass = formInicioSesión.password.value.trim();
+    let sPass = formInicioSesión.passwordIni.value.trim();
     let oExpRegPass = /^(?=(?:.*\d))(?=(?:.*[A-Z]))(?=(?:.*[a-z]))\S{5,10}$/;
 
     if (!oExpRegPass.test(sPass)) {
         // Si hasta el momento era correcto -> este el primer error
         if (bValido) {
-            formInicioSesión.password.focus();
+            formInicioSesión.passwordIni.focus();
             bValido = false;
         }
         sErrores += "\n- La contraseña no tiene el formato correcto (de 5 a 10 caracteres)";
-        formInicioSesión.password.classList.add("errorForm");
+        formInicioSesión.passwordIni.classList.add("errorForm");
     } else {
-        formInicioSesión.password.classList.remove("errorForm");
+        formInicioSesión.passwordIni.classList.remove("errorForm");
     }
 
     // --------------------------------------------------------------
@@ -109,7 +110,7 @@ function validarFormularioIniSesion() {
     if (bValido) { // Si todo OK
         // Inicia sesión si el formulario está relleno correctamente
         let correoUsuario = formInicioSesión.email.value;
-        let contraseñaUsuario = formInicioSesión.password.value;
+        let contraseñaUsuario = formInicioSesión.passwordIni.value;
 
         let sesionIniciada = oSpotify.iniciarSesion(correoUsuario,contraseñaUsuario);
 
@@ -118,7 +119,7 @@ function validarFormularioIniSesion() {
             mostrarFormSuscripcion();
         }else if(sesionIniciada == 2){
             alert("La contraseña no es correcta");
-            formSuscripcion.password.focus();
+            formSuscripcion.passwordIni.focus();
         }else{
             alert("Sesión iniciada correctamente. Crea tu primera Playlist");
             limpiarCamposInicioSesion();
@@ -270,7 +271,9 @@ function validarFormularioSuscripcion() {
 function mostrarFormCrearPlaylist() {
     if(oSpotify.sesionIniciada == null){
         alert("Inicie sesión para crear una playlist");
+        mostrarFormInicioSesion();
     }else{
+        limpiarCamposCrearPlaylist();
         ocultarFormularios();
         formCrearPlaylist.style.display = "block";
     }
@@ -280,7 +283,16 @@ function mostrarFormCrearPlaylist() {
 function limpiarCamposCrearPlaylist() {
     formCrearPlaylist.nombrePlayList.value = "";
     formCrearPlaylist.radioGenero.value = "todos";
+    limpiarComboPlaylist();
     opcionesTodas();
+}
+
+// Elimina las canciones de la playlist
+function limpiarComboPlaylist() {
+    var listaCanciones = document.getElementById("comboCrearPlaylist");
+    while (listaCanciones.childElementCount > 0) {
+        listaCanciones.removeChild(listaCanciones.childNodes[0]);
+    }
 }
 
 // Elimina las canciones de la lista
@@ -395,12 +407,12 @@ function añadirPlaylist(){
         var valoresPlaylist = comboPlaylist.options;
         var cancionesPlaylist = [];
 
-        for(var i = 0; i > valoresPlaylist.length; i++){
-            cancion = _buscarCancion(valoresPlaylist[i].value);
+        for(var i = 0; i < valoresPlaylist.length; i++){
+            var cancion = _buscarCancion(valoresPlaylist[i].value);
             cancionesPlaylist.push(cancion);
         }
 
-        let numCanciones = cancionesPlaylist.length();
+        let numCanciones = cancionesPlaylist.length;
         var oPlaylist = new Playlist(nombrePlayList,oCliente,numCanciones,cancionesPlaylist);
 
         if(oSpotify.añadirPlaylist(oPlaylist)){
@@ -434,8 +446,7 @@ function validarFormularioCrearPlaylist() {
     // Validación Canciones Añadidas
     let sComboPlaylist = document.getElementById('comboCrearPlaylist');
 
-    if (sComboPlaylist.value == 0 ||
-        sComboPlaylist.value == "") {
+    if (sComboPlaylist.options.length == 0) {
         bValido = false;
         sErrores = "\n- Debe añadir al menos una canción";
         formCrearPlaylist.comboCrearPlaylist.classList.add("errorForm");
@@ -447,8 +458,8 @@ function validarFormularioCrearPlaylist() {
     // --------------------------------------------------------------
     // COMPROBACIÓN FINAL
     if (bValido) { // Si todo OK
-        alert("El formulario se ha rellenado correctamente");
-
+       //alert("El formulario se ha rellenado correctamente");
+        añadirPlaylist();
     } else {
         //generamos el alert -------
         alert(sErrores);
@@ -491,10 +502,42 @@ function _buscarCancion(titulo){
 function _buscarPlaylist(oPlaylist){
     var oCliente = oPlaylist.creador;
 
-    for(var i = 0; i < oCliente.listaPlaylists.length(); i++){
+    for(var i = 0; i < oCliente.listaPlaylists.length; i++){
         if(oCliente.listaPlaylists[i].nombre == oPlaylist.nombre){
             return true;
         }
     }
     return false;
+}
+
+// IMPLEMENTACIÓN ARCHIVO XML ----------------------------------------------------------------------------------------------------------------
+function cargarXML(filename) {
+    if (window.XMLHttpRequest){
+        var xhttp = new XMLHttpRequest();
+    } else {// code for IE5 and IE6
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET", filename, false);
+
+    xhttp.send();
+
+    return xhttp.responseXML;
+}
+
+function cargarDatos(){
+    var oXML = cargarXML("canciones.xml");
+    var oCanciones = oXML.getElementsByTagName("cancion");
+
+    // Cargo las canciones
+    for(var i = 0; i < oCanciones.length; i++){
+        var titulo = oCanciones[i].getElementsByTagName("titulo")[0].textContent;
+        var artista = oCanciones[i].getElementsByTagName("artista")[0].textContent;
+        var disco = oCanciones[i].getElementsByTagName("disco")[0].textContent;
+        var año = oCanciones[i].getElementsByTagName("año")[0].textContent;
+        var genero = oCanciones[i].getElementsByTagName("genero")[0].textContent;
+
+        var cancion = new Cancion(titulo, artista, disco, año, genero);
+
+        oSpotify.añadirCancion(cancion);
+    }
 }

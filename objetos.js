@@ -65,7 +65,7 @@ class Spotify{
         if(oClientePremium != null){
             return false; // El cliente es premium y tiene un número ilimitado de Playlists
         }else{
-            if(oCliente.listaPlaylists.length() == 3){
+            if(oCliente.listaPlaylists.length == 3){
                 return true; // El cliente no es premium y tiene el máximo de Playlists permitidas
             }else{
                 return false;
@@ -73,6 +73,9 @@ class Spotify{
         }
     }
 
+    añadirCancion(cancion){
+        this.canciones.push(cancion);
+    }
 
 }
 
