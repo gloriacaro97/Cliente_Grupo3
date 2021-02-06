@@ -9,6 +9,26 @@ class Spotify{
     }
 
     // MÉTODOS
+    cerrarSesion(){
+        this.sesionIniciada = null;
+    }
+
+    iniciarSesion(email,password){
+        let oClienteExistente = null;
+        oClienteExistente = _buscarCliente(email);
+
+        if(oClienteExistente == null){
+            return 1; // No existe el usuario
+        }else{
+            if(oClienteExistente.contraseña != password){
+                return 2; // Contraseña incorrecta
+            }else{
+                this.sesionIniciada = oClienteExistente;
+                return 0; // Todo correcto
+            }
+        }
+    }
+
     añadirSuscripcion(oCliente){
         let oClienteExistente = null;
 
@@ -82,7 +102,7 @@ class Cliente{
     constructor(nombre,correo,contraseña){
         this.nombre = nombre;
         this.correo = correo;
-        this.constraseña = contraseña;
+        this.contraseña = contraseña;
         this.listaPlaylists = [];
     }
 }

@@ -8,14 +8,13 @@ var oSpotify = new Spotify();
 document.getElementById("playlist").addEventListener("click", mostrarFormCrearPlaylist);
 document.getElementById("suscripciones").addEventListener("click", mostrarFormSuscripcion);
 document.getElementById("inicioSesion").addEventListener("click", mostrarFormInicioSesion);
+document.getElementById("cerrarSesion").addEventListener("click", cerrarSesion);
 
 // Formulario Inicio Sesión
 document.getElementById("btnInicioSesion").addEventListener("click", validarFormularioIniSesion);
 
-
 // Formulario Suscripcion
 document.getElementById("btnSuscripcion").addEventListener("click", validarFormularioSuscripcion);
-document.getElementById("btnSuscripcion").addEventListener("click", añadirSuscripcion);
 
 // Formulario Crear Playlist
 document.getElementById("radioTodos").addEventListener("click", opcionesTodas);
@@ -40,11 +39,32 @@ function ocultarFormularios() {
     formCrearPlaylist.style.display = "none";
 }
 
+// CERRAR SESION ----------------------------------------------------------------------------------------------------------
+function cerrarSesion(){
+    if(oSpotify.sesionIniciada != null){
+        oSpotify.cerrarSesion();
+        ocultarFormularios();
+    }else{
+        alert("No hay ninguna sesión iniciada");
+        mostrarFormInicioSesion();
+    }
+}
+
 // FORMULARIO DE INICIO DE SESION ----------------------------------------------------------------------------------------------------------
 // Muestra el formulario de Inicio de Sesión 
 function mostrarFormInicioSesion() {
-    ocultarFormularios();
-    formInicioSesión.style.display = "block";
+    if(oSpotify.sesionIniciada == null){
+        ocultarFormularios();
+        formInicioSesión.style.display = "block";
+    }else{
+        alert("Ya hay una sesión iniciada");
+    }
+}
+
+// Limpia los campos del formulario
+function limpiarCamposInicioSesion() {
+    formInicioSesión.email.value = "";
+    formInicioSesión.password.value = "";
 }
 
 // VALIDACIÓN FORMULARIO INICIO DE SESIÓN *********
@@ -75,20 +95,36 @@ function validarFormularioIniSesion() {
     if (!oExpRegPass.test(sPass)) {
         // Si hasta el momento era correcto -> este el primer error
         if (bValido) {
-            formSuscripcion.password.focus();
+            formInicioSesión.password.focus();
             bValido = false;
         }
         sErrores += "\n- La contraseña no tiene el formato correcto (de 5 a 10 caracteres)";
-        formSuscripcion.password.classList.add("errorForm");
+        formInicioSesión.password.classList.add("errorForm");
     } else {
-        formSuscripcion.password.classList.remove("errorForm");
+        formInicioSesión.password.classList.remove("errorForm");
     }
 
     // --------------------------------------------------------------
     // COMPROBACIÓN FINAL
     if (bValido) { // Si todo OK
-        alert("El formulario se ha rellenado correctamente");
-        // método para iniciar sesión
+        // Inicia sesión si el formulario está relleno correctamente
+        let correoUsuario = formInicioSesión.email.value;
+        let contraseñaUsuario = formInicioSesión.password.value;
+
+        let sesionIniciada = oSpotify.iniciarSesion(correoUsuario,contraseñaUsuario);
+
+        if(sesionIniciada == 1){
+            alert("Usuario no registrado. Realice una suscripción");
+            mostrarFormSuscripcion();
+        }else if(sesionIniciada == 2){
+            alert("La contraseña no es correcta");
+            formSuscripcion.password.focus();
+        }else{
+            alert("Sesión iniciada correctamente. Crea tu primera Playlist");
+            limpiarCamposInicioSesion();
+            mostrarFormCrearPlaylist();
+        }
+
     } else {
         alert(sErrores);
     }
@@ -99,8 +135,12 @@ function validarFormularioIniSesion() {
 // FORMULARIO DE SUSCRIPCION ----------------------------------------------------------------------------------------------------------
 // Muestra el formulario de Suscripción
 function mostrarFormSuscripcion() {
-    ocultarFormularios();
-    formSuscripcion.style.display = "block";
+    if(oSpotify.sesionIniciada == null){
+        ocultarFormularios();
+        formSuscripcion.style.display = "block";
+    }else{
+        alert("Cierre la sesión para realizar una nueva suscripción");
+    }
 }
 
 // Limpia los campos del formulario
@@ -199,8 +239,8 @@ function validarFormularioSuscripcion() {
     }
 
     // Validación de que las dos contraseñas son iguales -----------------------------------------------------------
-    console.log(sPass1);
-    console.log(sPass2);
+    //console.log(sPass1);
+    //console.log(sPass2);
 
     if (sPass1 != sPass2) {
         formSuscripcion.password2.focus();
@@ -215,7 +255,7 @@ function validarFormularioSuscripcion() {
     // --------------------------------------------------------------
     // COMPROBACIÓN FINAL
     if (bValido) { // Si todo OK
-        alert("El formulario se ha rellenado correctamente");
+        //alert("El formulario se ha rellenado correctamente");
         añadirSuscripcion();
     } else {
         //generamos el alert -------
@@ -228,8 +268,12 @@ function validarFormularioSuscripcion() {
 // FORMULARIO DE CREAR PLAYLIST ----------------------------------------------------------------------------------------------------------
 // Muestra el formulario de Crear Playlist
 function mostrarFormCrearPlaylist() {
-    ocultarFormularios();
-    formCrearPlaylist.style.display = "block";
+    if(oSpotify.sesionIniciada == null){
+        alert("Inicie sesión para crear una playlist");
+    }else{
+        ocultarFormularios();
+        formCrearPlaylist.style.display = "block";
+    }
 }
 
 // Limpia los campos del formulario
