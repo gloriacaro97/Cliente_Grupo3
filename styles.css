@@ -16,5 +16,9 @@
 
 .errorForm {
     background-color: #FFFF93;
-  }
+}
 
+/* OCULTAMOS LAS FILAS DE LA TABLA ------------------------------------------------------------------*/
+.invisible{
+    display:none;
+}

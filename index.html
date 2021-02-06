@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="#" id="home">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="playlist">Playlist</a>
@@ -60,13 +60,38 @@
   <main role="main" class="container">
 
     <!-- CONTENIDO HOME --------------------------------------------------------------------------------------------------------------->
-    <!-- <div class="row">
-        <div class="col-lg-12">
-          <img class="img" src="img/home3.png" />
-        </div>
-      </div> -->
+    <div class="row mt-5">
+      <div class="col-md-6 offset-md-3">
+        <form class="form-horizontal" name="formFiltradoGenero">
+          <h5>Lista Cosas</h5>
+          <!-- Multiple Radios -->
+          <div class="form-group">
+            <label class="col-xs-4 control-label" for="radios">Géneros</label>
+            <div class="col-xs-4">
+              <div class="radio">
+                <label for="rbtGenero">
+                  <input name="rbtGenero" value="todos" checked="checked" type="radio">Todos<br>
+                  <!-- Inserta aqui resto de radio buttons correspondiente a géneros -->
+                </label>
+              </div>
+            </div>
+          </div>
 
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-xs-4 control-label" for="btnFiltrar"></label>
+            <div class="col-xs-4">
+              <input type="button" id="btnFiltrar" name="btnFiltrar" class="btn btn-success" value="Filtrar" />
+            </div>
+          </div>
 
+          <div class="col-xs-8" id="resultado">
+            <h2>Canciones</h2>
+            <!-- Inserta aquí la tabla con las canciones -->
+          </div>
+        </form>
+      </div>
+    </div>
     <!-- CONTENIDO HOME --------------------------------------------------------------------------------------------------------------->
 
     <!-- FORMULARIO INICIO SESIÓN --------------------------------------------------------------------------------------------------------------->
@@ -104,7 +129,6 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <!-- <button name="submit" type="button" class="btn btn-success">Acceder</button> -->
               <input name="submit" class="btn btn-success" value="Acceder" type="button" id="btnInicioSesion" />
             </div>
           </div>
@@ -114,14 +138,6 @@
     <!-- FORMULARIO INICIO SESIÓN --------------------------------------------------------------------------------------------------------------->
 
     <!-- FORMULARIO SUSCRIPCIÓN --------------------------------------------------------------------------------------------------------------->
-    <!-- <div class="alert alert-warning alert-dismissible" id="alertFormSuscripcion" role="alert">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <h4 class="alert-heading">Los siguientes errores deben ser solucionados para continuar:</h4>
-      <p id="textoErroresFormSuscripcion"></p> 
-      <hr>
-      <p class="mb-0">Comprueba tus datos e inténtalo de nuevo</p>
-    </div> -->
-
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <form name="formSuscripcion">
@@ -197,7 +213,6 @@
           <div class="form-group row">
             <div class="offset-4 col-8">
               <input name="submit" class="btn btn-success" value="Suscribirse" type="button" id="btnSuscripcion" />
-            <!--  <button name="submit" type="button" class="btn btn-success" id="btnSuscripcion">Suscribirse</button> -->
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
@@ -287,7 +302,6 @@
 
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <!--<button name="submit" type="button" class="btn btn-success" id="btnCrearPlaylist">Crear</button>-->
               <input name="submit" class="btn btn-success" value="Crear" type="button" id="btnCrearPlaylist" />
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>

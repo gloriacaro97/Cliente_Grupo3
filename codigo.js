@@ -6,10 +6,14 @@ cargarDatos();
 
 // EVENTOS A BOTONES ----------------------------------------------------------------------------------------------------------------------------------
 // NavBar
+document.getElementById("home").addEventListener("click", mostrarFormHome);
 document.getElementById("playlist").addEventListener("click", mostrarFormCrearPlaylist);
 document.getElementById("suscripciones").addEventListener("click", mostrarFormSuscripcion);
 document.getElementById("inicioSesion").addEventListener("click", mostrarFormInicioSesion);
 document.getElementById("cerrarSesion").addEventListener("click", cerrarSesion);
+
+// Formulario Home
+document.getElementById("btnFiltrar").addEventListener("click", filtrarDatos);
 
 // Formulario Inicio Sesión
 document.getElementById("btnInicioSesion").addEventListener("click", validarFormularioIniSesion);
@@ -29,14 +33,20 @@ document.getElementById("btnCrearPlaylist").addEventListener("click", validarFor
 
 // FORMULARIOS ----------------------------------------------------------------------------------------------------------------------------------
 
-// ocultarFormularios(); 
-ocultarFormularios();
+mostrarFormHome();
 
 // Oculta los formularios por defecto -----------------------------------------------------------------------------------------------
 function ocultarFormularios() {
+    formFiltradoGenero.style.display = "none";
     formInicioSesión.style.display = "none";
     formSuscripcion.style.display = "none";
     formCrearPlaylist.style.display = "none";
+}
+
+// HOME 
+function mostrarFormHome(){
+    ocultarFormularios();
+    formFiltradoGenero.style.display = "block";
 }
 
 // CERRAR SESION ----------------------------------------------------------------------------------------------------------
@@ -320,7 +330,7 @@ function opcionesTodas() {
 // Da como opción las canciones de género ROCK
 function opcionesRock() {
     limpiarComboCrearCanciones();
-    let cancionesRock = oSpotify.filtrarCanciones("ROCK");
+    let cancionesRock = oSpotify.filtrarCanciones("Rock");
     var listaCanciones = document.getElementById("comboCrearCanciones");
 
     for (var i = 0; i < cancionesRock.length; i++) {
@@ -334,7 +344,7 @@ function opcionesRock() {
 // Da como opción las canciones de género POP
 function opcionesPop() {
     limpiarComboCrearCanciones();
-    let cancionesPop = oSpotify.filtrarCanciones("POP");
+    let cancionesPop = oSpotify.filtrarCanciones("Pop");
     var listaCanciones = document.getElementById("comboCrearCanciones");
 
     for (var i = 0; i < cancionesPop.length; i++) {
@@ -348,7 +358,7 @@ function opcionesPop() {
 // Da como opción las canciones de género FLAMENCO
 function opcionesFlamenco() {
     limpiarComboCrearCanciones();
-    let cancionesFlamenco = oSpotify.filtrarCanciones("FLAMENCO");
+    let cancionesFlamenco = oSpotify.filtrarCanciones("Flamenco");
     var listaCanciones = document.getElementById("comboCrearCanciones");
 
     for (var i = 0; i < cancionesFlamenco.length; i++) {
@@ -534,10 +544,141 @@ function cargarDatos(){
         var artista = oCanciones[i].getElementsByTagName("artista")[0].textContent;
         var disco = oCanciones[i].getElementsByTagName("disco")[0].textContent;
         var año = oCanciones[i].getElementsByTagName("año")[0].textContent;
-        var genero = oCanciones[i].getElementsByTagName("genero")[0].textContent;
+        var genero = oCanciones[i].getAttribute("genero");
 
         var cancion = new Cancion(titulo, artista, disco, año, genero);
 
         oSpotify.añadirCancion(cancion);
+    }
+}
+
+// GESTIÓN HOME --------------------------------------------------------------------------------------------------------------------------------------
+
+cargarCanciones();
+
+function cargarCanciones(){
+    var oXML = cargarXML("canciones.xml");
+    var oCanciones = oXML.querySelectorAll("cancion");
+    var sGeneros = [];
+
+    // Creo una lista de canales sin repetición
+    for(var i=0; i < oCanciones.length;i++){
+        if(sGeneros.indexOf(oCanciones[i].getAttribute("genero")) < 0){
+            sGeneros.push(oCanciones[i].getAttribute("genero"));
+        }
+    }
+
+    // Creo los radio button necesarios
+    // <input name="rbtCanal" value="todos" checked="checked" type="radio">Todos<br>
+    for(var j=0;j<sGeneros.length;j++){
+        var oRBT = document.createElement("input");
+        oRBT.setAttribute("type","radio");
+        oRBT.setAttribute("name","rbtGenero");
+        oRBT.setAttribute("value",sGeneros[j]);
+        var oTexto = document.createTextNode(sGeneros[j]);
+        var oBR = document.createElement("BR");
+
+        var oLabel = document.querySelector("label[for='rbtGenero']");
+        oLabel.appendChild(oRBT);
+        oLabel.appendChild(oTexto);
+        oLabel.appendChild(oBR);
+    }
+}
+
+
+function cargarDatos() {
+    var oXML = cargarXML("canciones.xml");
+    var oCanciones = oXML.querySelectorAll("cancion");
+    //var oProgramasFecha = [];
+
+    // Filtrar programas que se emitan en la fecha seleccionada
+    /*for (var i=0; i< oProgramas.length; i++){
+        var oFecha = oProgramas[i].querySelector("fecha");
+
+        if (oFecha.textContent == sFecha){
+            oProgramasFecha.push(oProgramas[i]);
+        }
+    }*/
+
+    // Crear la tabla
+    var oTabla = document.createElement("TABLE");
+    oTabla.classList.add("table");
+    oTabla.classList.add("table-bordered");
+    oTabla.classList.add("table-hover");
+
+    //Crear fila encabezado
+    var oTHead = oTabla.createTHead();
+    var oFila = oTHead.insertRow(-1);
+    var oCelda = document.createElement("TH");
+    oCelda.textContent = "Título";
+    oFila.appendChild(oCelda);
+
+    oCelda = document.createElement("TH");
+    oCelda.textContent = "Artista";
+    oFila.appendChild(oCelda);
+
+    oCelda = document.createElement("TH");
+    oCelda.textContent = "Disco";
+    oFila.appendChild(oCelda);
+
+    oCelda = document.createElement("TH");
+    oCelda.textContent = "Año";
+    oFila.appendChild(oCelda);
+
+    oCelda = document.createElement("TH");
+    oCelda.textContent = "Género";
+    oFila.appendChild(oCelda);
+
+    //Crear filas de contenido
+    var oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+
+    for(var j=0; j<oCanciones.length;j++){
+
+        oFila = oTBody.insertRow(-1);
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = oCanciones[j].querySelector("titulo").textContent;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = oCanciones[j].querySelector("artista").textContent;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = oCanciones[j].querySelector("disco").textContent;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = oCanciones[j].querySelector("año").textContent;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = oCanciones[j].getAttribute("genero");
+        oFila.dataset.genero =  oCelda.textContent;
+    }
+
+    var oResultado = document.querySelector("#resultado");
+    for(var l=1; l< oResultado.children.length; l++){
+        oResultado.children[l].parentNode.removeChild(oResultado.children[l]);
+    }
+
+    oResultado.appendChild(oTabla);
+}
+
+function filtrarDatos() {
+    mostrarTodos();
+
+    var sGenero = formFiltradoGenero.rbtGenero.value;
+
+    if (sGenero != "todos"){
+        var oFilas = document.querySelectorAll("tr[data-genero]");
+
+        for(var i=0;i < oFilas.length; i++){
+            if (oFilas[i].dataset.genero != sGenero)
+                oFilas[i].classList.add("invisible");
+        }
+    }
+}
+
+function mostrarTodos(){
+    var oFilasInvisibles=document.querySelectorAll(".invisible");
+    for(var i=0;i < oFilasInvisibles.length; i++){
+        oFilasInvisibles[i].classList.remove("invisible");
     }
 }
