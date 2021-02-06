@@ -45,9 +45,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="inicioSesion">Inicia Sesión</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" id="cerrarSesion">Cerrar Sesión</a>
+
             </li>
           </ul>
         </div>
@@ -97,15 +95,14 @@
                     <i class="fa fa-lock"></i>
                   </div>
                 </div>
-                <input id="password" name="password" placeholder="Contraseña" type="password" required="required"
+                <input id="password" name="password" placeholder="Contraseña" type="text" required="required"
                   class="form-control">
               </div>
             </div>
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <!-- <button name="submit" type="button" class="btn btn-success">Acceder</button> -->
-              <input name="submit" class="btn btn-success" value="Acceder" type="button" id="btnInicioSesion" />
+              <button name="submit" type="button" class="btn btn-success">Acceder</button>
             </div>
           </div>
         </form>
@@ -114,14 +111,6 @@
     <!-- FORMULARIO INICIO SESIÓN --------------------------------------------------------------------------------------------------------------->
 
     <!-- FORMULARIO SUSCRIPCIÓN --------------------------------------------------------------------------------------------------------------->
-    <!-- <div class="alert alert-warning alert-dismissible" id="alertFormSuscripcion" role="alert">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <h4 class="alert-heading">Los siguientes errores deben ser solucionados para continuar:</h4>
-      <p id="textoErroresFormSuscripcion"></p> 
-      <hr>
-      <p class="mb-0">Comprueba tus datos e inténtalo de nuevo</p>
-    </div> -->
-
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <form name="formSuscripcion">
@@ -163,7 +152,7 @@
                     <i class="fa fa-lock"></i>
                   </div>
                 </div>
-                <input id="password" name="password" placeholder="Contraseña" type="password" class="form-control"
+                <input id="password" name="password" placeholder="Contraseña" type="text" class="form-control"
                   required="required">
               </div>
             </div>
@@ -177,7 +166,7 @@
                     <i class="fa fa-lock"></i>
                   </div>
                 </div>
-                <input id="password2" name="password2" placeholder="Confirma tu contraseña" type="password"
+                <input id="password2" name="password2" placeholder="Confirma tu contraseña" type="text"
                   class="form-control" required="required">
               </div>
             </div>
@@ -196,8 +185,7 @@
           </div>
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <input name="submit" class="btn btn-success" value="Suscribirse" type="button" id="btnSuscripcion" />
-            <!--  <button name="submit" type="button" class="btn btn-success" id="btnSuscripcion">Suscribirse</button> -->
+              <button name="submit" type="button" class="btn btn-success" id="btnSuscripcion">Suscribirse</button>
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
@@ -290,8 +278,8 @@
 
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <!--<button name="submit" type="button" class="btn btn-success" id="btnCrearPlaylist">Crear</button>-->
-              <input name="submit" class="btn btn-success" value="Crear" type="button" id="btnCrearPlaylist" />
+              <button name="submit" type="button" class="btn btn-success" id="btnCrearPlaylist">Crear</button>
+              <button name="submit" type="button" class="btn btn-success" id="btnMostrarModPlaylist">Modificar</button>
               <button name="submit" type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
@@ -299,6 +287,96 @@
       </div>
     </div>
     <!-- FORMULARIO CREAR PLAYLIST --------------------------------------------------------------------------------------------------------------->
+
+    <!-- FORMULARIO MODIFICAR PLAYLIST --------------------------------------------------------------------------------------------------------------->
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form name="formModPlaylist">
+          <h5>Modifica tus Playlist</h5>
+          <div class="form-group row mt-5">
+            <label for="selectPlaylist" class="col-4 col-form-label">Playlist</label>
+            <div class="col-8">
+              <select id="selectPlaylist" name="selectPlaylist" class="custom-select"
+                aria-describedby="selectPlaylistHelpBlock" required="required">
+                <option value="playlist1">Playlist1</option>
+                <option value="playlist2">Playlist2</option>
+              </select>
+              <span id="selectPlaylistHelpBlock" class="form-text text-muted">Selecciona la Playlist para modificar sus
+                canciones</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4">Género</label>
+            <div class="col-8">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input name="radioGeneroMod" id="radioTodosMod" type="radio" aria-describedby="radioGeneroModHelpBlock"
+                  required="required" class="custom-control-input" value="todos" checked>
+                <label for="radioTodosMod" class="custom-control-label">Todos</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input name="radioGeneroMod" id="radioRockMod" type="radio" aria-describedby="radioGeneroModHelpBlock"
+                  required="required" class="custom-control-input" value="rock">
+                <label for="radioRockMod" class="custom-control-label">Rock</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input name="radioGeneroMod" id="radioPopMod" type="radio" aria-describedby="radioGeneroModHelpBlock"
+                  required="required" class="custom-control-input" value="pop">
+                <label for="radioPopMod" class="custom-control-label">Pop</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input name="radioGeneroMod" id="radioFlamencoMod" type="radio"
+                  aria-describedby="radioGeneroModHelpBlock" required="required" class="custom-control-input"
+                  value="flamenco">
+                <label for="radioFlamencoMod" class="custom-control-label">Flamenco</label>
+              </div>
+              <span id="radioGeneroModHelpBlock" class="form-text text-muted">Filtra tus canciones por género</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="comboCanciones" class="col-4 col-form-label">Canciones</label>
+            <div class="col-8">
+              <select multiple="multiple" id="comboCanciones" name="comboCanciones"
+                aria-describedby="comboCancionesHelpBlock" required="required" class="custom-select">
+                <option value="cancion1">cancion1</option>
+                <option value="cancion2">cancion2</option>
+                <option value="cancion3">cancion3</option>
+              </select>
+              <span id="comboCancionesHelpBlock" class="form-text text-muted">Selecciona las canciones para tu
+                Playlist</span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="offset-8 col-8">
+              <button name="submit" type="button" class="btn btn-success" id="btnAñadirCancionMod">Añadir a playlist</button>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label" for="comboPlaylist">Tu Playlist</label>
+            <div class="col-8">
+              <select id="comboPlaylist" name="comboPlaylist" class="custom-select"
+                aria-describedby="comboPlaylistHelpBlock" required="required" multiple="multiple">
+                
+              </select>
+              <span id="comboPlaylistHelpBlock" class="form-text text-muted">Estas son las canciones en tu Playlist</span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="offset-8 col-8">
+              <button name="submit" type="button" class="btn btn-danger" id="btnEliminarCancionMod">Eliminar de playlist</button>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="offset-4 col-8">
+              <button name="submit" type="button" class="btn btn-success" id="btnModificarPlaylist">Modificar</button>
+              <button name="submit" type="reset" class="btn btn-danger" id="btnCancelarModPlaylist">Cancelar</button>
+            </div>
+          </div>
+        </form>
+        <!-- FORMULARIO MODIFICAR PLAYLIST --------------------------------------------------------------------------------------------------------------->
   </main>
 
 

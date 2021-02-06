@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Edited by XMLSpy -->
+<catalogo> POP ROCK FLAMENCO
+	<cancion>
+		<titulo>The Lion from the North</titulo>
+		<artista>Sabaton</artista>
+		<disco>Carolus Rex</disco>
+		<año>2012</año>		
+		<genero>ROCK</genero>
+	</cancion>
+	<cancion>
+		<titulo>Children of the Grave</titulo>
+		<artista>Black Sabbath</artista>
+		<disco>Master of Reality</disco>
+		<año>1971</año>
+		<genero>ROCK</genero>
+	</cancion>
+	<cancion>
+		<titulo>Fear of the Dark</titulo>
+		<artista>Iron Maiden</artista>
+		<disco>Fear of the Dark</disco>
+		<año>1992</año>
+		<genero>ROCK</genero>
+	</cancion>
+	<cancion>
+		<titulo>Bohemian Rhapsody</titulo>
+		<artista>Queen</artista>
+		<disco>A Night at the Opera</disco>
+		<año>1979</año>
+		<genero>ROCK</genero>
+	</cancion>
+	<cancion>
+		<titulo>Everybody</titulo>
+		<artista>Backstreet Boys</artista>
+		<disco>Fresh Hits 1997</disco>
+		<año>1997</año>
+		<genero>POP</genero>
+	</cancion>
+	<cancion>
+		<titulo>Wannabe</titulo>
+		<artista>Spice Girls</artista>
+		<disco>Now That's What I Call Music! 34</disco>
+		<año>1996</año>
+		<genero>POP</genero>
+	</cancion>
+	<cancion>
+		<titulo>Sufre mamon</titulo>
+		<artista>Hombres G</artista>
+		<disco>Voy a pasármelo bien</disco>
+		<año>1989</año>
+		<genero>POP</genero>
+	</cancion>
+	<cancion>
+		<titulo>Break My Heart</titulo>
+		<artista>Dua Lipa</artista>
+		<disco>Future Nostalgia</disco>
+		<año>2020</año>
+		<genero>POP</genero>
+	</cancion>
+	<cancion>
+		<titulo>Desde la Azotea</titulo>
+		<artista>Niña Pastori</artista>
+		<disco>Bajo tus alas</disco>
+		<año>2018</año>
+		<genero>FLAMENCO</genero>
+	</cancion>
+	<cancion>
+		<titulo>Escúchame Mujer</titulo>
+		<artista>Fondo Flamenco</artista>
+		<disco>Contracorriente</disco>
+		<año>2007</año>
+		<genero>FLAMENCO</genero>
+	</cancion>
+	<cancion>
+		<titulo>Como Camaron</titulo>
+		<artista>Estopa</artista>
+		<disco>La maqueta</disco>
+		<año>1999</año>
+		<genero>FLAMENCO</genero>
+	</cancion>
+	<cancion>
+		<titulo>El Ratón</titulo>
+		<artista>Diego El Cigala</artista>
+		<disco>Insdestructible</disco>
+		<año>2016</año>
+		<genero>FLAMENCO</genero>
+	</cancion>
+</catalogo>
