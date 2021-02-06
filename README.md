@@ -3,12 +3,11 @@ Práctica del Bloque 2 para la asignatura Desarrollo Web en entorno Cliente del 
 
 En este proyecto, hemos creado una aplicación web de música.
 Dentro de las funcionalidades de la aplicación tenemos:
-  - Crear una cuenta como cliente, pudiendo ser premium o no.
-  - Modificar tus datos de usuario.
+  - Ver las canciones pudiendo filtrar por género.
   - Iniciar sesión en la aplicación con tus datos.
+  - Crear una playlist [si la cuenta que tiene la sesión iniciada no es premium, tendrá la limitación de crear un máximo de tres playlists]
+  - Realizar una suscripción [crear una cuenta como cliente, pudiendo ser premium o no]
+  - Ver tus playlists.
   - Cerrar una sesión iniciada.
-  - Ver las canciones que hay en la aplicación.
-  - Filtrar las canciones por género.
-  - Crear playlists en tu cuenta. Si tu cuenta no es premium, tendrás la limitación de crear un máximo de tres playlists.
-  - Modificar las playlists que hayas creado.
-  - Ver todas las playlists, incluyendo las de otros usuarios.
+
+No se podrá acceder a la sección Playlist si no hay una sesión iniciada.
