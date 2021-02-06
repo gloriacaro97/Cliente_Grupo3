@@ -498,3 +498,23 @@ function _buscarPlaylist(oPlaylist){
     }
     return false;
 }
+
+// IMPLEMENTACIÓN ARCHIVO XML ----------------------------------------------------------------------------------------------------------------
+function cargarDatos(){
+    var oXML = loadXMLDoc("canciones.xml");
+    var oCanciones = oXML.getElementsByTagName("cancion");
+
+    //Introduzco los juegos
+    for(var i = 0; i < oCanciones.length; i++){
+        var titulo = oCanciones[i].getElementsByTagName("titulo")[0].textContent;
+        var genero = oCanciones[i].getElementsByTagName("genero")[0].textContent;
+        var anyo = oCanciones[i].getElementsByTagName("anyo_lanzamiento")[0].textContent;
+        var precio = oCanciones[i].getElementsByTagName("precio")[0].textContent;
+        var pegi = oCanciones[i].getElementsByTagName("pegi")[0].textContent;
+
+        var juego = new Juego(i, titulo, genero, anyo, precio, pegi);
+
+        tienda.registrarJuego(juego);
+
+    }
+}

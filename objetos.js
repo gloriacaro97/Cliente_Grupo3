@@ -73,6 +73,9 @@ class Spotify{
         }
     }
 
+    añadirCancion(cancion){
+        this.canciones.push(cancion);
+    }
 
 }
 
