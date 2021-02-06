@@ -53,7 +53,7 @@ function mostrarFormHome(){
 function cerrarSesion(){
     if(oSpotify.sesionIniciada != null){
         oSpotify.cerrarSesion();
-        ocultarFormularios();
+        mostrarFormHome();
         alert("Ha cerrado la sesión");
     }else{
         alert("No hay ninguna sesión iniciada");
@@ -179,7 +179,7 @@ function añadirSuscripcion() {
     if (oSpotify.añadirSuscripcion(oCliente)) {
         alert("Cliente añadido");
         limpiarCamposSuscripcion();
-        ocultarFormularios();
+        mostrarFormHome();
     } else {
         alert("Ese cliente ya existe");
     }
@@ -521,6 +521,7 @@ function _buscarPlaylist(oPlaylist){
 }
 
 // IMPLEMENTACIÓN ARCHIVO XML ----------------------------------------------------------------------------------------------------------------
+
 function cargarXML(filename) {
     if (window.XMLHttpRequest){
         var xhttp = new XMLHttpRequest();
@@ -555,6 +556,7 @@ function cargarDatos(){
 // GESTIÓN HOME --------------------------------------------------------------------------------------------------------------------------------------
 
 cargarCanciones();
+cargarTabla();
 
 function cargarCanciones(){
     var oXML = cargarXML("canciones.xml");
@@ -569,7 +571,6 @@ function cargarCanciones(){
     }
 
     // Creo los radio button necesarios
-    // <input name="rbtCanal" value="todos" checked="checked" type="radio">Todos<br>
     for(var j=0;j<sGeneros.length;j++){
         var oRBT = document.createElement("input");
         oRBT.setAttribute("type","radio");
@@ -586,7 +587,7 @@ function cargarCanciones(){
 }
 
 
-function cargarDatos() {
+function cargarTabla() {
     var oXML = cargarXML("canciones.xml");
     var oCanciones = oXML.querySelectorAll("cancion");
     //var oProgramasFecha = [];
