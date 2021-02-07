@@ -35,21 +35,91 @@ document.getElementById("btnCrearPlaylist").addEventListener("click", validarFor
 
 mostrarFormHome();
 
-// Oculta los formularios por defecto -----------------------------------------------------------------------------------------------
+// Oculta los formularios por defecto -----------------------------------------------------------------------------------------------------------
 function ocultarFormularios() {
     formFiltradoGenero.style.display = "none";
     formInicioSesión.style.display = "none";
     formSuscripcion.style.display = "none";
     formCrearPlaylist.style.display = "none";
+    document.getElementById("resultado").style.display = 'none';
+    document.getElementById("divPlaylist").style.display = 'none';
 }
 
-// HOME 
+// HOME ----------------------------------------------------------------------------------------------------------------------------------------
 function mostrarFormHome(){
     ocultarFormularios();
+    mostrarPlaylists();
     formFiltradoGenero.style.display = "block";
+    document.getElementById("resultado").style.display = 'block';
 }
 
-// CERRAR SESION ----------------------------------------------------------------------------------------------------------
+function mostrarPlaylists(){
+    if(oSpotify.sesionIniciada == null){
+        document.getElementById("divPlaylist").style.display = 'none';
+    }else{
+        var listaPlaylist = oSpotify.playlistCliente(oSpotify.sesionIniciada);
+
+        // Eliminamos todos los elementos del div
+        var divPlaylist = document.getElementById("divPlaylist");
+        while (divPlaylist.childElementCount > 0) {
+            divPlaylist.removeChild(divPlaylist.childNodes[0]);
+        }
+
+        // Añadimos el título
+        var titulo = document.createElement("H4");
+        var textoTitulo = document.createTextNode("Tus Playlist");
+        titulo.appendChild(textoTitulo);
+        divPlaylist.appendChild(titulo);
+
+        // Añadimos las tablas con las playlist
+        for(var i = 0; i < listaPlaylist.length; i++){
+            var oTabla = document.createElement("TABLE");
+            oTabla.classList.add("table");
+            oTabla.classList.add("table-bordered");
+            oTabla.classList.add("table-hover");
+
+            var nombrePlayList = document.createElement("H5");
+            var textoNombre = document.createTextNode(listaPlaylist[i].nombre);
+            nombrePlayList.appendChild(textoNombre);
+            divPlaylist.appendChild(nombrePlayList);
+
+            //Crear fila encabezado
+            var oTHead = oTabla.createTHead();
+            var oFila = oTHead.insertRow(-1);
+            var oCelda = document.createElement("TH");
+            oCelda.textContent = "Título";
+            oFila.appendChild(oCelda);
+
+            oCelda = document.createElement("TH");
+            oCelda.textContent = "Artista";
+            oFila.appendChild(oCelda);
+
+            //Crear filas de contenido
+            var oTBody = document.createElement("TBODY");
+            oTabla.appendChild(oTBody);
+
+            for(var j=0; j < listaPlaylist[i].listaCanciones.length;j++){
+                var oCanciones = listaPlaylist[i].listaCanciones;
+                console.log(oCanciones[j]);
+                oFila = oTBody.insertRow(-1);
+                oCelda = oFila.insertCell(-1);
+                oCelda.textContent = oCanciones[j].titulo;
+
+                oCelda = oFila.insertCell(-1);
+                oCelda.textContent = oCanciones[j].artista;
+            }
+
+            console.log(oTabla);
+            var oResultado = document.querySelector("#divPlaylist");
+
+            oResultado.appendChild(oTabla);
+        }
+        
+        document.getElementById("divPlaylist").style.display = 'block';
+    }
+}
+
+// CERRAR SESION --------------------------------------------------------------------------------------------------------------------------------
 function cerrarSesion(){
     if(oSpotify.sesionIniciada != null){
         oSpotify.cerrarSesion();
@@ -428,6 +498,7 @@ function añadirPlaylist(){
         if(oSpotify.añadirPlaylist(oPlaylist)){
             alert("Playlist añadida correctamente");
             limpiarCamposCrearPlaylist();
+            mostrarFormHome();
         }else{
             alert("Ya existe una playlist con ese nombre");
         }
@@ -590,22 +661,13 @@ function cargarCanciones(){
 function cargarTabla() {
     var oXML = cargarXML("canciones.xml");
     var oCanciones = oXML.querySelectorAll("cancion");
-    //var oProgramasFecha = [];
-
-    // Filtrar programas que se emitan en la fecha seleccionada
-    /*for (var i=0; i< oProgramas.length; i++){
-        var oFecha = oProgramas[i].querySelector("fecha");
-
-        if (oFecha.textContent == sFecha){
-            oProgramasFecha.push(oProgramas[i]);
-        }
-    }*/
 
     // Crear la tabla
     var oTabla = document.createElement("TABLE");
     oTabla.classList.add("table");
     oTabla.classList.add("table-bordered");
     oTabla.classList.add("table-hover");
+    oTabla.classList.add("table-striped");
 
     //Crear fila encabezado
     var oTHead = oTabla.createTHead();

@@ -73,6 +73,10 @@ class Spotify{
         }
     }
 
+    playlistCliente(oSesionIniciada){
+        return oSesionIniciada.listaPlaylists;
+    }
+
     añadirCancion(cancion){
         this.canciones.push(cancion);
     }
